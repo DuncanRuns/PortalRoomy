@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+}
+
+group 'me.duncanruns.portalroomy'
+version '1.3.0'
+
+tasks.withType(JavaCompile) {
+    options.release = 8
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+
+    implementation 'com.formdev:flatlaf:3.0'
+}
+
+jar {
+
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+
+    manifest {
+        // Thanks to answers from this: https://stackoverflow.com/questions/33020069/how-to-get-version-attribute-from-a-gradle-build-to-be-included-in-runtime-swing
+        attributes 'Main-Class': 'me.duncanruns.portalroomy.PortalRoomyApp',
+                'Multi-Release': true,
+                'Implementation-Version': version
+    }
+
+    from {
+        configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+test {
+    useJUnitPlatform()
+}
