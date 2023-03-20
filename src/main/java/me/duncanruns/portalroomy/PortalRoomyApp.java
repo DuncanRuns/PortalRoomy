@@ -52,7 +52,7 @@ public class PortalRoomyApp {
         jFrame.add(copyCurrent, gbc);
 
         angleButton = new JButton("Copy Angle");
-        angleButton.addActionListener(e -> Clipboard.copy(getCurrentOut()));
+        angleButton.addActionListener(e -> Clipboard.copy(getAngleOut()));
         jFrame.add(angleButton, gbc);
 
         gbc.gridx = 2;
