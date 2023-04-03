@@ -95,6 +95,10 @@ public class PortalRoomyApp {
         return currentOut;
     }
 
+    public static String getAngleOut() {
+        return angleOut;
+    }
+
     private static String getCalculatedOut() {
         return calculatedOut;
     }
@@ -129,7 +133,9 @@ public class PortalRoomyApp {
         double x = Math.floor(Double.parseDouble(numStrings[0]));
         int y = (int) Math.floor(Double.parseDouble(numStrings[1]));
         double z = Math.floor(Double.parseDouble(numStrings[2]));
-        int yaw = ((int) Double.parseDouble(numStrings[3]) + 180) % 360 - 180;
+        int yaw = ((int) Double.parseDouble(numStrings[3])) % 360;
+        if (yaw > 180) yaw -= 360;
+        if (yaw < -180) yaw += 360;
 
         int outx;
         int outz;
@@ -160,10 +166,6 @@ public class PortalRoomyApp {
         String currentAngle = Integer.toString(yaw);
         angleButton.setText("Copy Angle (" + currentAngle + ")");
         angleOut = currentAngle;
-    }
-
-    public static String getAngleOut() {
-        return angleOut;
     }
 
     private static String getVersion() {
